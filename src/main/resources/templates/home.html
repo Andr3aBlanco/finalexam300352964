@@ -43,6 +43,8 @@
 </head>
 <body>
 
+<h1>Final Exam Set C</h1>
+
 <h1>Category Sales Summary</h1>
 
 <table class="center">
@@ -51,17 +53,17 @@
         <th>Category Description</th>
         <th>Total Sales</th>
     </tr>
-    <tr th:each="cat : ${category}">
+    <tr th:each="cat : ${summary}">
         <td th:text="${cat.getCatcode()}"></td>
-        <td th:text="${cat.getCatdesc()}">Smith</td>
-        <td>50</td>
+        <td th:text="${cat.getCatdesc()}"></td>
+        <td th:text="${cat.getQty()}"></td>
     </tr>
 </table>
 
 <br>
 <br>
 
-<form action="/saveSale" method="post">
+<form th:action="@{saveSale}" method="post">
     <div>
         <label for="receiptNumber">Receipt Number:</label>
         <input type="number" id="receiptNumber" name="receiptNumber" required>
@@ -108,8 +110,8 @@
         <td th:text="${sale.getQty()}"></td>
         <td th:text="${sale.getDot()}"></td>
 
-        <td><a class="btn btn-success" th:href="@{editTransaction(id=${sale.getId()})}">Edit</a></td>
-        <td><a class="btn btn-danger" onClick="return confirm('you want to delete this record?')" th:href="@{deteleTransaction(id=${sale.getId()})}">DELETE</a></td>
+        <td><a class="btn btn-success" th:href="@{editSale(id=${sale.getId()})}">Edit</a></td>
+        <td><a class="btn btn-danger" onClick="return confirm('you want to delete this record?')" th:href="@{deleteSale(id=${sale.getId()})}">DELETE</a></td>
     </tr>
 </table>
 </body>

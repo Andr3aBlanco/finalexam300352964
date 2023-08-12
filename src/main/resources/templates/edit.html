@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit </title>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+
+  <!-- Include Bootstrap 4 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Include Bootstrap 4 JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+
+  <style>
+    .pre-scrollable{
+      height:500px;
+      overflow-y:scroll;
+    }
+    h1 {
+      text-align: center;
+    }
+
+
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh; /* Adjust to your needs */
+    }
+
+  </style>
+
+
+</head>
+<body>
+
+<form th:action="@{saveEdit}" method="post">
+  <div>
+    <label for="receiptNumber">Receipt Number:</label>
+    <input type="number" id="receiptNumber" name="receiptNumber" th:value="${sale.getRecno()}" disabled>
+  </div>
+  <div>
+    <label for="saleDate">Sale Date:</label>
+    <input type="date" id="saleDate" name="saleDate" th:value="${sale.getDot()}" disabled>
+  </div>
+  <div>
+    <label for="availableSeats">Available Seats:</label>
+
+    <select id="availableSeats" name="itemCode"  th:value="${sale.getIcode()}" required>
+
+      <option th:each="item : ${items}" th:value="${item.getIcode()}" th:text="${item.getIcode()} + ' : ' + ${item.getIdesc()}">
+      </option>
+
+    </select>
+  </div>
+  <div>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" th:value="${sale.getQty()}" required>
+  </div>
+  <div>
+    <input type="hidden" name="saleID" th:value="${sale.getId()}">
+    <input type="hidden" name="sale" th:value="${sale}">
+    <button class="btn btn-primary" type="submit" th:href="@{/index}">Save</button>
+  </div>
+</form>
+
+<a class="btn btn-success" th:href="@{/index}">Back</a>
+
+
+</body>
+</html>
